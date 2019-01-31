@@ -1,18 +1,24 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template, request
 from string import ascii_lowercase
 
 
 app = Flask(__name__)
 
 
-@app.route('/<string:word>', methods=['GET'])
-def counter(word):
+@app.route('/result', methods=['POST'])
+def counter():
+    word = request.form['word']
     alphabet = {k: 0 for k in ascii_lowercase}
     for letter in word:
         if not alphabet[letter]:
             alphabet[letter] += 1
-    return jsonify(alphabet)
+    return render_template('result.html', alphabet=alphabet)
+
+
+@app.route('/', methods=['GET'])
+def hello():
+    return render_template('hello.html')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
