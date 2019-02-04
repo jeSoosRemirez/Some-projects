@@ -17,7 +17,7 @@ def counter():
 
 @app.route('/', methods=['GET'])
 def hello():
-    return render_template('hello.html')
+    return render_template('welcome.html')
 
 
 if __name__ == '__main__':
